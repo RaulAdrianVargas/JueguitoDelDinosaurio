@@ -1,0 +1,80 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+
+body {
+    background-color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.tituloDelJuego{
+    color: #ddd;
+    margin: 20px;
+    text-shadow: 2px 2px #333;
+}
+
+a{
+    margin: 20px;
+    display: block;
+    padding: 10px 15px;
+    background: #dad9d9;
+    color: rgb(61, 124, 18);
+    border: none;
+    border-radius: 25px;
+}
+
+a:hover{
+    background: rgb(155, 38, 116);
+    color: #dad9d9;
+}
+
+#game {
+    width: 500px;
+    height: 200px;
+    border: 1px solid black;
+    background-color: #ddd;
+    position: relative; /* Agregado */
+    overflow: hidden; /* Para evitar que los elementos se salgan */
+}
+.animate{
+    animation: jump 500ms;
+
+}
+@keyframes jump {
+    0%{top:145px;}
+    30%{top:100px;}
+    70%{top: 100px;}
+    100%{top: 145px;}
+}
+
+#personaje {
+    width: 20px;
+    height: 50px;
+    background-color: rebeccapurple;
+    position: absolute; /* Cambiado a absolute */
+    bottom: 10px; /* Ajustado para iniciar 10px desde abajo */
+    left: 10px; /* Ajustado para iniciar 10px desde la izquierda */
+}
+
+#enemigo {
+    width: 20px;
+    height: 20px;
+    background-color: brown;
+    position: absolute; /* Cambiado a absolute */
+    bottom: 10px; /* Ajustado para iniciar 10px desde abajo */
+    right: 10px; /* Ajustado para iniciar 10px desde la derecha */
+    animation: enemigo 3s infinite linear; /* Ajustado la animación */
+}
+
+@keyframes enemigo {
+    0% { right: 10px; } /* Ajustado para iniciar 10px desde la derecha */
+    100% { right: calc(100% - 20px); } /* Animación hasta el borde izquierdo del #game */
+}
