@@ -15,13 +15,13 @@ body {
     height: 100vh;
 }
 
-.tituloDelJuego{
+.tituloDelJuego {
     color: #ddd;
     margin: 20px;
     text-shadow: 2px 2px #333;
 }
 
-a{
+a {
     margin: 20px;
     display: block;
     padding: 10px 15px;
@@ -31,50 +31,80 @@ a{
     border-radius: 25px;
 }
 
-a:hover{
+a:hover {
     background: rgb(155, 38, 116);
     color: #dad9d9;
 }
 
 #game {
     width: 500px;
-    height: 200px;
+    height: 300px;
     border: 1px solid black;
     background-color: #ddd;
-    position: relative; /* Agregado */
+    position: relative; /* Necesario para posicionar elementos dentro */
     overflow: hidden; /* Para evitar que los elementos se salgan */
-}
-.animate{
-    animation: jump 500ms;
-
-}
-@keyframes jump {
-    0%{top:145px;}
-    30%{top:100px;}
-    70%{top: 100px;}
-    100%{top: 145px;}
 }
 
 #personaje {
-    width: 20px;
-    height: 50px;
-    background-color: rebeccapurple;
+    width: 128px;
+    height: 128px;
+    background-image: url(../assets/Swordsman/Run.png);
+    background-repeat: no-repeat;
     position: absolute; /* Cambiado a absolute */
     bottom: 10px; /* Ajustado para iniciar 10px desde abajo */
     left: 10px; /* Ajustado para iniciar 10px desde la izquierda */
+    z-index: 10;
+    animation: caminar 1s steps(8) infinite;
 }
+
+@keyframes caminar {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: -1024px 0; /* -128px * 8 frames */
+    }
+}
+
+#personaje.animate {
+    animation: jump 500ms;
+}
+
+
+#personaje.animate {
+    animation: jump 1s steps(8) linear;
+}
+
+@keyframes jump {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-50px); /* Cambia la altura del salto */
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
 
 #enemigo {
     width: 20px;
     height: 20px;
-    background-color: brown;
-    position: absolute; /* Cambiado a absolute */
-    bottom: 10px; /* Ajustado para iniciar 10px desde abajo */
-    right: 10px; /* Ajustado para iniciar 10px desde la derecha */
-    animation: enemigo 3s infinite linear; /* Ajustado la animación */
+    background-color: rgb(122, 87, 33);
+    border-radius: 50%;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    z-index: 5;
+    animation: enemigo 3s infinite linear;
 }
 
 @keyframes enemigo {
-    0% { right: 10px; } /* Ajustado para iniciar 10px desde la derecha */
-    100% { right: calc(100% - 20px); } /* Animación hasta el borde izquierdo del #game */
+    0% {
+        right: 10px;
+    }
+    100% {
+        right: calc(100% - 20px);
+    }
 }

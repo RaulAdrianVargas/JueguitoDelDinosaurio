@@ -1,7 +1,7 @@
 let personaje = document.getElementById("personaje");
 let enemigo = document.getElementById("enemigo");
 let game = document.getElementById("game");
-let perderInterval; // Variable para almacenar el intervalo de verificación de colisión
+let perderInterval;
 
 // Función para que el personaje salte
 function jump() {
@@ -26,12 +26,24 @@ function detectarColision() {
     let personajeRect = personaje.getBoundingClientRect();
     let enemigoRect = enemigo.getBoundingClientRect();
 
+    // Ajustar la hitbox del personaje
+    let personajeHitbox = {
+        left: personajeRect.left + 70,
+        top: personajeRect.top + 10,
+        right: personajeRect.left + 128 - 50,
+        bottom: personajeRect.top + 128 - 10
+    };
+
+    // Logs de depuración
+    console.log("Personaje Hitbox:", personajeHitbox);
+    console.log("Enemigo Rect:", enemigoRect);
+
     // Detectar colisión cuando los elementos se tocan
     if (
-        personajeRect.right >= enemigoRect.left &&
-        personajeRect.left <= enemigoRect.right &&
-        personajeRect.bottom >= enemigoRect.top &&
-        personajeRect.top <= enemigoRect.bottom
+        personajeHitbox.right >= enemigoRect.left &&
+        personajeHitbox.left <= enemigoRect.right &&
+        personajeHitbox.bottom >= enemigoRect.top &&
+        personajeHitbox.top <= enemigoRect.bottom
     ) {
         clearInterval(perderInterval); // Detener la verificación de colisión
         enemigo.style.animation = "none";
@@ -40,5 +52,5 @@ function detectarColision() {
     }
 }
 
-// Verificar colisión en intervalos regulares y almacenar el intervalo en perderInterval
+// Verificar colisión en intervalos más cortos
 perderInterval = setInterval(detectarColision, 10);
